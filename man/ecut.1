@@ -1,0 +1,48 @@
+.\" Manpage for ecut.
+.\" Contact sage@sooper.com to correct errors or typos.
+.TH ecut 1 "12 Dec 2012" "1.2" "ecut man page"
+.SH NAME
+ecut \- cut, but with regex instead
+.SH SYNOPSIS
+ecut [\fIOPTIONS\fR] EXPRESSION  [\fIFILE\fR]
+.SH DESCRIPTION
+ecut is essentially much like the cut command but uses a regular EXPRESSION to do your matching.  This gives you more flexibility in extracting target data instead of just going by bytes or character delimeters.  The EXPRESSION should be pcre compatible.
+.SH EXAMPLES
+.TP
+w | ecut "average: .+?, (.+?),"
+Would display only the matched 5 min load average
+.TP
+ps -aef | ecut "postfix\\s+(\\d+)"
+Lists just the pids for the postfix user
+.TP
+ps -aef | ecut "^(\S+?)\\s+(\\d+)" > usernpids.csv
+Get a CSV list of running user ID's and PID's
+.TP
+ps -aef | ecut root
+Will work and displays lines containing "root", but operates more like a grep when you don't use a set of matching ()'s around a target
+.SH OPTIONS
+The ecut utility has the following options
+.TP
+\fB\-d\fR [delimeter]\fR
+will insert the specified delimeter between matched fields ( default is a comma ) 
+.TP
+\fB\-h\fR
+display help information
+.TP
+\fB\-n\fR
+no carriage return between lines
+.TP
+\fB\-v\fR
+invert the match, display lines that do not match the EXPRESSION
+.TP
+\fB\-V\fR
+display the version information
+.TP
+If no file is passed, standard input is assumed
+.RE
+.SH SEE ALSO
+ecut(1), cut(1)
+.SH BUGS
+No known bugs.
+.SH AUTHOR
+Ivan Kluzak (sage@sooper.com)

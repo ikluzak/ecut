@@ -1,0 +1,11 @@
+
+To install 
+
+ ./configure
+ make
+ make install
+
+That should work.  If it doesn't .. well i'm new to creating automake configs :)
+
+-Ivan
+
